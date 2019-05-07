@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+							http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+							http://www.springframework.org/schema/beans 
+							http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+							http://www.springframework.org/schema/context 
+							http://www.springframework.org/schema/context/spring-context-4.0.xsd
+							http://www.springframework.org/schema/aop 
+							http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+							http://www.springframework.org/schema/tx 
+							http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+	<!-- springmvc扫描包结构 里的注解,而且有服务端 use-default-filters="false" 让springmvc不加载任何注解 
+		再配置：支持Controller里的注解 -->
+	<context:component-scan base-package="com.lnsoft"
+		use-default-filters="false">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	<!-- 映射器，适配器，类型转换，json -->
+	<mvc:annotation-driven />
+
+	<!-- 视图解析器 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/pages/" p:suffix=".jsp" />
+	<!-- 加载静态资源 -->
+	<mvc:resources location="/commons/" mapping="/commons/**" />
+	<mvc:resources location="/pages/" mapping="/pages/**" />
+	<!-- 上传解析器 -->
+	<!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" 
+		p:defaultEncoding="UTF-8" p:maxUploadSize="3145728" /> -->
+
+	<!-- 拦截首页，相当于web.xml里的拦截index.jsp首页一个道理 path等价@RequestMapping，拦截的请求 view-name等价ModelAndview，跳转视图,由视图解析器品直接前缀后缀 -->
+	<mvc:view-controller path="/" view-name="commons/login" />
+
+	<!-- 全局时间处理 -->
+	<mvc:annotation-driven conversion-service="conversionService" />
+	<bean id="conversionService"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<set>
+				<ref bean="dateConvert" />
+			</set>
+		</property>
+	</bean>
+	<bean id="dateConvert" class="com.lnsoft.commons.convert.DateConvert"></bean>
+
+
+	<mvc:annotation-driven>
+		<!-- 处理responseBody 里面日期类型 -->
+		<mvc:message-converters>
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="objectMapper">
+					<bean class="com.fasterxml.jackson.databind.ObjectMapper">
+						<property name="dateFormat">
+							<bean class="java.text.SimpleDateFormat">
+								<constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />
+							</bean>
+						</property>
+					</bean>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	<!-- 配置拦截器  -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<!-- <mvc:mapping path="/login/login" /> -->
+			<mvc:mapping path="/im/**" />
+			<!-- <mvc:mapping path="/im/login" /> -->
+			<!-- <mvc:mapping path="/**" /> -->
+			<mvc:exclude-mapping path="/im/login" />
+			<bean class="com.lnsoft.commons.interacptorConfig.AuthInteracptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+</beans>

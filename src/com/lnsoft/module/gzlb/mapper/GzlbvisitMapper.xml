@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lnsoft.module.gzlb.mapper.GzlbvisitMapper" >
+  <resultMap id="BaseResultMap" type="com.lnsoft.module.gzlb.pojo.Gzlbvisit" >
+    <result column="REQUESTPATH" property="requestpath" jdbcType="VARCHAR" />
+    <result column="STARTTIME" property="starttime" jdbcType="DATE" />
+    <result column="IPHOST" property="iphost" jdbcType="VARCHAR" />
+    <result column="ENDTIME" property="endtime" jdbcType="DATE" />
+    <result column="REQUESTCOUNT" property="requestcount" jdbcType="DECIMAL" />
+    <result column="STATUS" property="status" jdbcType="DECIMAL" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.lnsoft.module.gzlb.pojo.Gzlbvisit" extends="BaseResultMap" >
+    <result column="EXECUTETIME" property="executetime" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    REQUESTPATH, STARTTIME, IPHOST, ENDTIME, REQUESTCOUNT, STATUS
+  </sql>
+  <sql id="Blob_Column_List" >
+    EXECUTETIME
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.lnsoft.module.gzlb.pojo.GzlbvisitExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from GZLBVISIT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lnsoft.module.gzlb.pojo.GzlbvisitExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from GZLBVISIT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.lnsoft.module.gzlb.pojo.GzlbvisitExample" >
+    delete from GZLBVISIT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lnsoft.module.gzlb.pojo.Gzlbvisit" >
+    insert into GZLBVISIT (REQUESTPATH, STARTTIME, IPHOST, 
+      ENDTIME, REQUESTCOUNT, STATUS, 
+      EXECUTETIME)
+    values (#{requestpath,jdbcType=VARCHAR}, #{starttime,jdbcType=DATE}, #{iphost,jdbcType=VARCHAR}, 
+      #{endtime,jdbcType=DATE}, #{requestcount,jdbcType=DECIMAL}, #{status,jdbcType=DECIMAL}, 
+      #{executetime,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lnsoft.module.gzlb.pojo.Gzlbvisit" >
+    insert into GZLBVISIT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="requestpath != null" >
+        REQUESTPATH,
+      </if>
+      <if test="starttime != null" >
+        STARTTIME,
+      </if>
+      <if test="iphost != null" >
+        IPHOST,
+      </if>
+      <if test="endtime != null" >
+        ENDTIME,
+      </if>
+      <if test="requestcount != null" >
+        REQUESTCOUNT,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="executetime != null" >
+        EXECUTETIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="requestpath != null" >
+        #{requestpath,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=DATE},
+      </if>
+      <if test="iphost != null" >
+        #{iphost,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=DATE},
+      </if>
+      <if test="requestcount != null" >
+        #{requestcount,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="executetime != null" >
+        #{executetime,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lnsoft.module.gzlb.pojo.GzlbvisitExample" resultType="java.lang.Integer" >
+    select count(*) from GZLBVISIT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update GZLBVISIT
+    <set >
+      <if test="record.requestpath != null" >
+        REQUESTPATH = #{record.requestpath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starttime != null" >
+        STARTTIME = #{record.starttime,jdbcType=DATE},
+      </if>
+      <if test="record.iphost != null" >
+        IPHOST = #{record.iphost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endtime != null" >
+        ENDTIME = #{record.endtime,jdbcType=DATE},
+      </if>
+      <if test="record.requestcount != null" >
+        REQUESTCOUNT = #{record.requestcount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=DECIMAL},
+      </if>
+      <if test="record.executetime != null" >
+        EXECUTETIME = #{record.executetime,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update GZLBVISIT
+    set REQUESTPATH = #{record.requestpath,jdbcType=VARCHAR},
+      STARTTIME = #{record.starttime,jdbcType=DATE},
+      IPHOST = #{record.iphost,jdbcType=VARCHAR},
+      ENDTIME = #{record.endtime,jdbcType=DATE},
+      REQUESTCOUNT = #{record.requestcount,jdbcType=DECIMAL},
+      STATUS = #{record.status,jdbcType=DECIMAL},
+      EXECUTETIME = #{record.executetime,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update GZLBVISIT
+    set REQUESTPATH = #{record.requestpath,jdbcType=VARCHAR},
+      STARTTIME = #{record.starttime,jdbcType=DATE},
+      IPHOST = #{record.iphost,jdbcType=VARCHAR},
+      ENDTIME = #{record.endtime,jdbcType=DATE},
+      REQUESTCOUNT = #{record.requestcount,jdbcType=DECIMAL},
+      STATUS = #{record.status,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

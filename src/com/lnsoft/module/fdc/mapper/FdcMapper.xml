@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lnsoft.module.fdc.mapper.FdcMapper">
+	<sql id="visit">
+		REQUESTPATH,STARTTIME, IPHOST,
+		ENDTIME, REQUESTCOUNT,
+		EXECUTETIME,STATUS
+	</sql>
+	<select id="queryFdcByInnerfragment" resultType="map">
+		select distinct
+		v.innerfragment,
+		m.localname,m.pathname
+		from
+		pmsln_d5000.t_ld_measurement m
+		inner join pmsln_d5000.t_dev_belong b on
+		m.logic_id = b.father_id and b.tag
+		= 1 and b.sign != 2
+		inner join
+		pmsln_d5000.t_ld_measurementvalue v on b.child_id = v.logic_id
+		inner
+		join pmsln_d5000.t_ld_measurementtype ty on ty.id =
+		m.measurementtype
+		inner join pmsln_d5000.t_dev_belong fb on fb.child_id = m.logic_id
+		inner join pmsln_d5000.t_dev_dict dev on dev.logic_dev_id =
+		fb.father_id
+		where m.tag = 1 and dev.tag = 1
+		and v.localname = 'SCADA'
+		and dev.dev_type_id = '100'
+		and v.innerfragment=#{ment}
+	</select>
+	<select id="queryFdcByInnerfrag" resultType="map">
+		select distinct
+		v.innerfragment,
+		m.localname,m.pathname
+		from pmsln_d5000.t_ld_measurement m
+		inner join pmsln_d5000.t_dev_belong b on m.logic_id = b.father_id and b.tag
+		= 1 and b.sign != 2
+		inner join pmsln_d5000.t_ld_measurementvalue v on b.child_id = v.logic_id
+		inner join pmsln_d5000.t_ld_measurementtype ty on ty.id =
+		m.measurementtype
+		inner join pmsln_d5000.t_dev_belong fb on fb.child_id = m.logic_id
+		inner join pmsln_d5000.t_dev_dict dev on dev.logic_dev_id = fb.father_id
+		where m.tag = 1 and dev.tag = 1
+		and v.localname = 'SCADA'
+		and dev.dev_type_id = '100'
+	</select>
+	<select id="queryFdcVisitAll" resultType="com.lnsoft.module.fdc.pojo.Fdcvisit">
+		select
+		<include refid="visit" />
+		from FDCVISIT
+	</select>
+	<insert id="insertFdcVisit" parameterType="map">
+		insert into
+		FDCVISIT
+		(REQUESTPATH, STARTTIME, IPHOST,
+		ENDTIME, REQUESTCOUNT,
+		EXECUTETIME,STATUS)
+		values
+		(#{params.requestPath,jdbcType=VARCHAR},
+		#{params.startTime},
+		#{params.ipHost,jdbcType=VARCHAR},
+		#{params.endTime},
+		#{params.requestCount,jdbcType=DECIMAL},
+		#{params.executeTime,jdbcType=LONGVARCHAR},
+		#{params.status,jdbcType=DECIMAL})
+	</insert>
+</mapper>

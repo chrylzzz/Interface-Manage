@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lnsoft.module.ld.mapper.LdMapper">
+	<sql id="visit">
+		REQUESTPATH,STARTTIME, IPHOST,
+		ENDTIME, REQUESTCOUNT,
+		EXECUTETIME,STATUS
+	</sql>
+	<insert id="insertLdVisit" parameterType="map">
+		insert into
+		LDVISIT
+		(REQUESTPATH, STARTTIME, IPHOST,
+		ENDTIME, REQUESTCOUNT,
+		EXECUTETIME,STATUS)
+		values
+		(#{params.requestPath,jdbcType=VARCHAR},
+		#{params.startTime},
+		#{params.ipHost,jdbcType=VARCHAR},
+		#{params.endTime},
+		#{params.requestCount,jdbcType=DECIMAL},
+		#{params.executeTime,jdbcType=LONGVARCHAR},
+		#{params.status,jdbcType=DECIMAL})
+	</insert>
+	<select id="queryLdVisitAll" resultType="com.lnsoft.module.ld.pojo.Ldvisit">
+		select
+		<include refid="visit" />
+		from LDVISIT
+	</select>
+</mapper>

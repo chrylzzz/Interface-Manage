@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:cxf="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://cxf.apache.org/jaxws
+		http://cxf.apache.org/schemas/jaxws.xsd">
+
+
+	<context:component-scan base-package="com.lnsoft" />
+
+	<!-- <cxf:endpoint implementor="#ddjcServiceImpl" address="/im/ddjc" /> -->
+	<!-- ld -->
+	<cxf:server serviceClass="com.lnsoft.module.ld.service.LdService"
+		address="/im/ld">
+		<cxf:serviceBean>
+			<ref bean="ldServiceImpl" />
+		</cxf:serviceBean>
+	</cxf:server>
+	<!-- ddjc -->
+	<cxf:server serviceClass="com.lnsoft.module.ddjc.service.DdjcService"
+		address="/im/ddjc">
+		<cxf:serviceBean>
+			<ref bean="ddjcServiceImpl" />
+		</cxf:serviceBean>
+	</cxf:server>
+	<!--ems -->
+	<cxf:server serviceClass="com.lnsoft.module.ems.kafka.service.KafkaService"
+		address="/im/ems">
+		<cxf:serviceBean>
+			<ref bean="kafkaServerImpl" />
+		</cxf:serviceBean>
+	</cxf:server>
+	<!--fdc -->
+	<cxf:server serviceClass="com.lnsoft.module.fdc.service.FdcService"
+		address="/im/fdc">
+		<cxf:serviceBean>
+			<ref bean="fdcServiceImpl" />
+		</cxf:serviceBean>
+	</cxf:server>
+	<!--gzlb -->
+	<cxf:server serviceClass="com.lnsoft.module.gzlb.service.GzlbService"
+		address="/im/gzlb">
+		<cxf:serviceBean>
+			<ref bean="gzlbServiceImpl" />
+		</cxf:serviceBean>
+	</cxf:server>
+	<!--pms -->
+	<cxf:server serviceClass="com.lnsoft.module.pms.service.PmsService"
+		address="/im/pms">
+		<cxf:serviceBean>
+			<ref bean="pmsServiceImpl" />
+		</cxf:serviceBean>
+	</cxf:server>
+	<!--qx -->
+	<cxf:server serviceClass="com.lnsoft.module.qx.qxzhyj.service.QxzhyjService"
+		address="/im/qxzhyj">
+		<cxf:serviceBean>
+			<ref bean="qxzhyjServiceImpl" />
+		</cxf:serviceBean>
+	</cxf:server>
+	<!--sbdzxjc -->
+	<cxf:server serviceClass="com.lnsoft.module.sbdzxjc.service.SbdzxjcService"
+		address="/im/sbdzxjc">
+		<cxf:serviceBean>
+			<ref bean="sbdzxjcServiceImpl" />
+		</cxf:serviceBean>
+	</cxf:server>
+
+
+	<!--测试 -->
+	<!-- <cxf:server serviceClass="com.lnsoft.module.ld.controller.LdController" 
+		address="/im/ld"> <cxf:serviceBean> <ref bean="ldServiceImpl" /> </cxf:serviceBean> 
+		</cxf:server> -->
+
+	<!-- <cxf:endpoint implementor="com.lnsoft.module.ld.controller.LdController" 
+		address="/im/ld"> </cxf:endpoint> -->
+
+</beans>

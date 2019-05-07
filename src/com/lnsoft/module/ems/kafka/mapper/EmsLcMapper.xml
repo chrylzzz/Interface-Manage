@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lnsoft.module.ems.kafka.mapper.EmsLcMapper">
+
+	<!-- <resultMap id="BaseResultMap" type="com.lnsoft.module.ems.kafka.pojo.EmsLc"> 
+		<id column="key_id" jdbcType="VARCHAR" property="keyId" /> <result column="lc_type" 
+		jdbcType="VARCHAR" property="lcType" /> </resultMap> -->
+	<select id="queryLcType" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select 
+			key_id 
+		from 
+			ems_lc_dict_20181115 
+		where
+			lc_type=#{lcType}
+	</select>
+</mapper>

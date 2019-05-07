@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lnsoft.module.ddjc.mapper.DdjcMapper">
+	<sql id="visit">
+		REQUESTPATH,STARTTIME, IPHOST,
+		ENDTIME, REQUESTCOUNT,
+		EXECUTETIME,STATUS
+	</sql>
+	<insert id="insertDdjcVisit" parameterType="map">
+		insert into DDJCVISIT
+		(REQUESTPATH, STARTTIME, IPHOST,
+		ENDTIME, REQUESTCOUNT,
+		EXECUTETIME,STATUS)
+		values
+		(#{params.requestPath,jdbcType=VARCHAR},
+		#{params.startTime},
+		#{params.ipHost,jdbcType=VARCHAR},
+		#{params.endTime},
+		#{params.requestCount,jdbcType=DECIMAL},
+		#{params.executeTime,jdbcType=LONGVARCHAR},
+		#{params.status,jdbcType=DECIMAL})
+	</insert>
+	<select id="mapperQueryAllById" parameterType="map" resultType="map">
+		<foreach collection="params" index="key" item="value"
+			separator="," open="(" close=")">
+			select * from ${key}
+			<where>
+				<if test="value!=null and value!=''">
+					YSJL_ID=#{value}
+				</if>
+			</where>
+		</foreach>
+	</select>
+	<select id="mapperQueryAllById2" parameterType="map" resultType="map">
+		<foreach collection="params" index="key" item="value"
+			separator="," open="(" close=")">
+			select * from ${key}
+			<where>
+				<if test="value!=null and value!=''">
+					SJID=#{value}
+				</if>
+			</where>
+		</foreach>
+	</select>
+	<select id="queryDdjcVisitAll" resultType="com.lnsoft.module.ddjc.pojo.Ddjcvisit">
+		select
+		<include refid="visit" />
+		from DDJCVISIT
+	</select>
+
+	<insert id="insertDdjcInVisit" parameterType="map">
+		insert into
+		DDJCINVISIT
+		(REQUESTPATH, STARTTIME, IPHOST,
+		ENDTIME, REQUESTCOUNT,
+		EXECUTETIME,STATUS)
+		values
+		(#{params.requestPath,jdbcType=VARCHAR},
+		#{params.startTime},
+		#{params.ipHost,jdbcType=VARCHAR},
+		#{params.endTime},
+		#{params.requestCount,jdbcType=DECIMAL},
+		#{params.executeTime,jdbcType=LONGVARCHAR},
+		#{params.status,jdbcType=DECIMAL})
+	</insert>
+	<select id="queryDdjcInVisitAll" resultType="com.lnsoft.module.ddjc.pojo.Ddjcinvisit">
+		select
+		<include refid="visit" />
+		from DDJCINVISIT
+	</select>
+	<select id="mapperQueryAll" parameterType="map" resultType="map">
+		<foreach collection="params" index="key" item="value"
+			separator="," open="(" close=")">
+			select * from ${key}
+		</foreach>
+	</select>
+</mapper>

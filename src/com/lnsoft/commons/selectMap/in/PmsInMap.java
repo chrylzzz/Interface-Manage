@@ -1,0 +1,109 @@
+package com.lnsoft.commons.selectMap.in;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class PmsInMap {
+	public static final Map<String, String> pmsInMap = new HashMap<String, String>();
+	static {
+		// pms
+		// 台帐
+		pmsInMap.put("T_SB_ZWYC_XL", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_DAOXIAN", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_DIXIAN", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_GT", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_GL", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_ZSBYQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_ZSDLQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_ZSFHKG", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_ZSGLKG", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_ZSCHQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_ZSDLSRDQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_XLBLQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_XLGZZSQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_ZSDRQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_ZSDYHGQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_ZSDLHGQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_ZSZHHGQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_ZSFDQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_ZSTRBYQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_ZDTYQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_ZYYHJRD", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_DLD", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_DLZD", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_DLJT", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_DLFZX", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_XLFSSS", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_ZBYQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_PDBYQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_SYB", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_JDB", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_DLQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_GLKG", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_FHKG", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_RDQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_MX", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_DKQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_DLHGQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_DYHGQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_ZHHGQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_DLDRQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_OHDRQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_BLQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_XHZZ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_JDDZ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_ZHDQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_KGG", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_DZ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_FDXQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_BLZ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_JYZ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_CQTG", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_ZBQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_JHLBQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_JDW", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_GZZSQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_ZNDL", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_DLZD", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_DLJT", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_GZZZ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_JTWGBCZZ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_JZWGBCFSZZ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_CLBCZZ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_LBDRQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_JLLBQ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_CQG", "OBJ_ID");
+		pmsInMap.put("T_SB_ZLSB_TBSFZ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZLSB_QDDZ", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_ZNHWG", "OBJ_ID");
+		pmsInMap.put("T_SB_ECSB_HLZKBXT", "OBJ_ID");
+		pmsInMap.put("T_SB_ZLSB_HLZFNLSXT", "OBJ_ID");
+		pmsInMap.put("T_SB_ZLSB_HLZFWLQXT", "OBJ_ID");
+		pmsInMap.put("T_SB_DYSB_DYXL", "OBJ_ID");
+		pmsInMap.put("T_SB_ZNYC_JGDY", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_WLG", "OBJ_ID");
+		pmsInMap.put("T_SB_ZWYC_DL", "OBJ_ID");
+		// 缺陷
+		pmsInMap.put("T_DW_BZZX_GGDMB", "OBJ_ID");
+		pmsInMap.put("T_DW_BZZX_BZFLB", "OBJ_ID");
+		pmsInMap.put("T_YJ_DWYJ_QXJL", "OBJ_ID");
+		// 试验设备
+		pmsInMap.put("T_ZH_ZTJX_GGDM", "OBJ_ID");
+		pmsInMap.put("T_ZH_ZTJX_SYJL", "OBJ_ID");
+		pmsInMap.put("T_ZH_ZTJX_SYSB", "OBJ_ID");
+		pmsInMap.put("T_ZH_ZTJX_SYSBXM", "OBJ_ID");
+		pmsInMap.put("T_ZH_ZTJX_SYSJZ", "OBJ_ID");
+		pmsInMap.put("T_ZH_ZTJX_SYZXMJG", "OBJ_ID");
+		// 试验存储规则
+		pmsInMap.put("T_ZH_ZTJX_SYMB", "OBJ_ID");
+		pmsInMap.put("T_ZH_ZTJX_SYXZ", "OBJ_ID");
+		pmsInMap.put("T_ZH_ZTJX_SYMBXM ", "OBJ_ID");
+		pmsInMap.put("T_ZH_ZTJX_SYXM", "OBJ_ID");
+		pmsInMap.put("T_ZH_ZTJX_SYXMZXM", "OBJ_ID");
+		pmsInMap.put("T_ZH_ZTJX_SYZXM", "OBJ_ID");
+		pmsInMap.put("T_ZH_ZTJX_SYBWSBLX", "OBJ_ID");
+		pmsInMap.put("T_ZH_ZTJX_SYBW", "OBJ_ID");
+		pmsInMap.put("T_ZH_ZTJX_SYMBXB", "OBJ_ID");
+		pmsInMap.put("T_ZH_ZTJX_SYXB", "OBJ_ID");
+	}
+}

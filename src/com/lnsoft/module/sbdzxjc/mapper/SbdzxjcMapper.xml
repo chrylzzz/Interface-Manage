@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lnsoft.module.sbdzxjc.mapper.SbdzxjcMapper">
+	<sql id="visit">
+		REQUESTPATH,STARTTIME, IPHOST,
+		ENDTIME, REQUESTCOUNT,
+		EXECUTETIME,STATUS
+	</sql>
+	<sql id="ts">
+		OBJ_ID,OBJ_DISPIDX,OBJ_CAPTION,LINKEDDEVICE,DEVICECODE,to_char(ACQUISITIONTIME,'yyyy-MM-dd
+		hh24:mm:ss') ae,
+		PHASE,H2,CH4,C2H4,C2H2,CO,CO2,O2,N2,TOTALHYDROCARBON,ISHANDLED,C2H6,RESAVE_TIME
+	</sql>
+
+	<select id="mapperQueryAllById" parameterType="map" resultType="map">
+		<foreach collection="params" index="key" item="value"
+			separator="," open="(" close=")">
+			select * from ${key}
+			<where>
+				<if test="value!=null and value!=''">
+					OBJ_ID=#{value}
+				</if>
+			</where>
+		</foreach>
+	</select>
+	<select id="mapperQueryAll" parameterType="map" resultType="map">
+		<foreach collection="params" index="key" item="value"
+			separator="," open="(" close=")">
+			select * from ${key}
+		</foreach>
+	</select>
+	<select id="queryTableHaveTSById" parameterType="map"
+		resultType="map">
+		select
+		<include refid="ts" />
+		from ZXJC_APP.CMST_SOLUBLEGASINOIL
+		where OBJ_ID=#{objId}
+	</select>
+	<select id="queryTableHaveTS" parameterType="map" resultType="map">
+		select
+		<include refid="ts" />
+		from ZXJC_APP.CMST_SOLUBLEGASINOIL
+	</select>
+	<insert id="insertSbdzxjcVisit" parameterType="map">
+		insert into
+		SBDZXJCVISIT
+		(REQUESTPATH, STARTTIME, IPHOST,
+		ENDTIME, REQUESTCOUNT,
+		EXECUTETIME,STATUS)
+		values
+		(#{params.requestPath,jdbcType=VARCHAR},
+		#{params.startTime},
+		#{params.ipHost,jdbcType=VARCHAR},
+		#{params.endTime},
+		#{params.requestCount,jdbcType=DECIMAL},
+		#{params.executeTime,jdbcType=LONGVARCHAR},
+		#{params.status,jdbcType=DECIMAL})
+	</insert>
+	<select id="querySbdzxjcVisitAll" resultType="com.lnsoft.module.sbdzxjc.pojo.Sbdzxjcvisit">
+		select
+		<include refid="visit" />
+		from SBDZXJCVISIT
+	</select>
+	<insert id="insertSbdzxjcInVisit" parameterType="map">
+		insert into
+		SBDZXJCINVISIT
+		(REQUESTPATH, STARTTIME, IPHOST,
+		ENDTIME, REQUESTCOUNT,
+		EXECUTETIME,STATUS)
+		values
+		(#{params.requestPath,jdbcType=VARCHAR},
+		#{params.startTime},
+		#{params.ipHost,jdbcType=VARCHAR},
+		#{params.endTime},
+		#{params.requestCount,jdbcType=DECIMAL},
+		#{params.executeTime,jdbcType=LONGVARCHAR},
+		#{params.status,jdbcType=DECIMAL})
+	</insert>
+	<select id="querySbdzxjcInVisitAll" resultType="com.lnsoft.module.sbdzxjc.pojo.Sbdzxjcinvisit">
+		select
+		<include refid="visit" />
+		from SBDZXJCINVISIT
+	</select>
+</mapper>

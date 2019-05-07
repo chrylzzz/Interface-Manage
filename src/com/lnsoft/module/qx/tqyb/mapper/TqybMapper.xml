@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lnsoft.module.qx.tqyb.mapper.TqybMapper">
+	<!-- to_char(params.requestPath,'yyyy-mm-dd hh24:mi:ss') to_date(#{params.requestPath,jdbcType=VARCHAR},'YYYY-MM-DD 
+		hh24:mi:ss') to_date(to_char(#{params.startTime,jdbcType=DATE},'yyyy-MM-dd 
+		hh24:mi:ss'),'YYYY-MM-DD hh24:mi:ss') -->
+	<sql id="visit">
+		REQUESTPATH,STARTTIME, IPHOST,
+		ENDTIME, REQUESTCOUNT,
+		EXECUTETIME,STATUS
+	</sql>
+	<insert id="insertTqybVisit" parameterType="map">
+		insert into TQYBVISIT
+		(REQUESTPATH, STARTTIME, IPHOST,
+		ENDTIME, REQUESTCOUNT,
+		EXECUTETIME,STATUS)
+		values
+		(#{params.requestPath,jdbcType=VARCHAR},
+		#{params.startTime},
+		#{params.ipHost,jdbcType=VARCHAR},
+		#{params.endTime},
+		#{params.requestCount,jdbcType=DECIMAL},
+		#{params.executeTime,jdbcType=LONGVARCHAR},
+		#{params.status,jdbcType=DECIMAL})
+	</insert>
+	<select id="queryTqybVisitAll" resultType="com.lnsoft.module.qx.tqyb.pojo.Tqybvisit">
+		select
+		<include refid="visit" />
+		from TQYBVISIT
+	</select>
+</mapper>

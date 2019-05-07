@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lnsoft.module.qx.qxzhyj.mapper.QxzhyjMapper">
+	<sql id="visit">
+		REQUESTPATH, STARTTIME, IPHOST,
+		ENDTIME, REQUESTCOUNT,
+		EXECUTETIME,STATUS
+	</sql>
+	<select id="mapperQueryAllById" parameterType="map" resultType="map">
+		<foreach collection="params" index="key" item="value"
+			separator="," open="(" close=")">
+			select * from ${key}
+			<where>
+				<if test="value!=null and value!=''">
+					YJXH=#{value}
+				</if>
+			</where>
+		</foreach>
+	</select>
+	<select id="mapperQueryAll" parameterType="map" resultType="map">
+		<foreach collection="params" index="key" item="value"
+			separator="," open="(" close=")">
+			select * from ${key}
+		</foreach>
+	</select>
+	<insert id="insertQxzhyjVisit" parameterType="map">
+		insert into
+		QXZHYJVISIT
+		(REQUESTPATH, STARTTIME, IPHOST,
+		ENDTIME, REQUESTCOUNT,
+		EXECUTETIME,STATUS)
+		values
+		(#{params.requestPath,jdbcType=VARCHAR},
+		#{params.startTime},
+		#{params.ipHost,jdbcType=VARCHAR},
+		#{params.endTime},
+		#{params.requestCount,jdbcType=DECIMAL},
+		#{params.executeTime,jdbcType=LONGVARCHAR},
+		#{params.status,jdbcType=DECIMAL})
+	</insert>
+	<select id="queryQxzhyjVisitAll" resultType="com.lnsoft.module.qx.qxzhyj.pojo.Qxzhyjvisit">
+		select
+		<include refid="visit" />
+		from QXZHYJVISIT
+	</select>
+</mapper>

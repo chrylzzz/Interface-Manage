@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+							http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+							http://www.springframework.org/schema/aop
+							http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+							http://www.springframework.org/schema/context
+							http://www.springframework.org/schema/context/spring-context-4.0.xsd
+							http://www.springframework.org/schema/tx 
+							http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+	
+	<!-- c3p0_18 -->
+	<bean id="c3p0_18" class="com.mchange.v2.c3p0.ComboPooledDataSource" 
+		p:driverClass="${c3p0_18.driverClass}" 
+		p:jdbcUrl="${c3p0_18.jdbcUrl}" 
+		p:user="${c3p0_18.user}"
+		p:password="${c3p0_18.password}" />
+	<!-- ddjc-13 -->
+	<bean id="c3p0_13" class="com.mchange.v2.c3p0.ComboPooledDataSource" 
+		p:driverClass="${c3p0_13.driverClass}" 
+		p:jdbcUrl="${c3p0_13.jdbcUrl}" 
+		p:user="${c3p0_13.user}"
+		p:password="${c3p0_13.password}" />
+	<!-- sbdzxjc-48 -->
+	<bean id="c3p0_48" class="com.mchange.v2.c3p0.ComboPooledDataSource" 
+		p:driverClass="${c3p0_48.driverClass}" 
+		p:jdbcUrl="${c3p0_48.jdbcUrl}" 
+		p:user="${c3p0_48.user}"
+		p:password="${c3p0_48.password}" />
+	<!-- gzlb-20 -->
+	<bean id="c3p0_20" class="com.mchange.v2.c3p0.ComboPooledDataSource" 
+		p:driverClass="${c3p0_20.driverClass}" 
+		p:jdbcUrl="${c3p0_20.jdbcUrl}" 
+		p:user="${c3p0_20.user}"
+		p:password="${c3p0_20.password}" />
+	<!-- 监听-39 -->
+	<bean id="c3p0_39" class="com.mchange.v2.c3p0.ComboPooledDataSource" 
+		p:driverClass="${c3p0_39.driverClass}" 
+		p:jdbcUrl="${c3p0_39.jdbcUrl}" 
+		p:user="${c3p0_39.user}"
+		p:password="${c3p0_39.password}" />
+		
+	<!-- 动态数据源 -->
+	<bean id="c3p0" class="com.lnsoft.commons.dynamicDataSource.DynamicDataSource">
+        <property name="targetDataSources">
+            <map key-type="java.lang.String">
+                <entry value-ref="c3p0_18" key="c3p0_18"></entry>
+                <entry value-ref="c3p0_13" key="c3p0_13"></entry>
+                <entry value-ref="c3p0_48" key="c3p0_48"></entry>
+                <entry value-ref="c3p0_20" key="c3p0_20"></entry>
+                <entry value-ref="c3p0_39" key="c3p0_39"></entry>
+            </map>
+        </property>
+        <!-- 默认使用server的数据源 -->
+        <property name="defaultTargetDataSource" ref="c3p0_18"></property>
+    </bean>
+	<!-- hibernate:LoaclSessionFactoryBean-->
+	<bean id="localSessionFactoryBean" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+		p:dataSource-ref="c3p0" p:packagesToScan="com.etoak.bean" >
+			<property name="hibernateProperties">
+				<props>
+					<prop key="hibernate.dialect">
+						org.hibernate.dialect.MySQLDialect
+					</prop>
+					<prop key="hibernate.show_sql">true</prop>
+					<prop key="hibernate.format_sql">true</prop>
+				</props>
+			</property>
+	</bean>
+	<!-- hibernateTransactionManager -->
+	<bean id="hibernate_txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+		p:sessionFactory-ref="localSessionFactoryBean" />
+	<!-- hibernate的注解事务 -->
+	<tx:annotation-driven transaction-manager="hibernate_txManager" proxy-target-class="true"/>
+</beans>
+
+
+
+
+
+
+
+
+
